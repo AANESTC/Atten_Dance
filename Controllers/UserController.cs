@@ -28,13 +28,25 @@ namespace AttendanceAPI.Controllers
             var user = new User
             {
                 Name = request.Name,
-                BioID = request.BioID
+                BioID = request.BioID,
+                Department = request.Department,
+                Role = request.Role,
+                Gender = request.Gender
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return Ok(new { userId = user.Id, name = user.Name });
+        }
+
+        [HttpGet("next-id")]
+        public async Task<IActionResult> GetNextId()
+        {
+            var year = DateTime.Now.Year;
+            var maxId = await _context.Users.CountAsync();
+            var nextIdStr = $"{(maxId + 1):D4}-{year}";
+            return Ok(new { nextId = nextIdStr });
         }
     }
 }

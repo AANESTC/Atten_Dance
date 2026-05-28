@@ -26,6 +26,8 @@ builder.Services.AddHttpClient("AIService", client =>
     client.BaseAddress = new Uri("http://localhost:8000");
 });
 
+builder.Services.AddHostedService<AttendanceAPI.Services.DailyAttendanceService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

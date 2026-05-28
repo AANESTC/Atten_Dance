@@ -3,6 +3,7 @@ using System;
 using AttendanceAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AttendanceAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260526102032_AddTotalWorkingHours")]
+    partial class AddTotalWorkingHours
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,30 +39,12 @@ namespace AttendanceAPI.Migrations
                     b.Property<DateTime>("AttendanceDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<double?>("AttendancePercentage")
-                        .HasColumnType("double precision");
-
                     b.Property<string>("AttendanceStatus")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<double?>("BreakDuration")
-                        .HasColumnType("double precision");
-
                     b.Property<TimeSpan?>("EveningCheckOut")
                         .HasColumnType("interval");
-
-                    b.Property<bool>("IsAbsent")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsEarlyExit")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsHalfDay")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsLateEntry")
-                        .HasColumnType("boolean");
 
                     b.Property<bool>("LateEntryStatus")
                         .HasColumnType("boolean");

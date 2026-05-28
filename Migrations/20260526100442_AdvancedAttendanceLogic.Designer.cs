@@ -3,6 +3,7 @@ using System;
 using AttendanceAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AttendanceAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260526100442_AdvancedAttendanceLogic")]
+    partial class AdvancedAttendanceLogic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,16 +64,13 @@ namespace AttendanceAPI.Migrations
                     b.Property<bool>("IsLateEntry")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("LateEntryStatus")
-                        .HasColumnType("boolean");
-
                     b.Property<TimeSpan?>("LunchCheckOut")
                         .HasColumnType("interval");
 
                     b.Property<TimeSpan?>("MorningCheckIn")
                         .HasColumnType("interval");
 
-                    b.Property<double?>("TotalWorkingHours")
+                    b.Property<double?>("TotalHoursWorked")
                         .HasColumnType("double precision");
 
                     b.Property<int>("UserId")
